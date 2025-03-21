@@ -5,7 +5,7 @@ import React from 'react'
 function Header() {
   return (
     <div className='flex justify-between p-5 shadow-sm'>
-      <Image src={'/valtech.png'} width={150} height={200}></Image>
+      <Image src={'/valtech.png'} alt='valtech' width={150} height={200}></Image>
       <Button>Get Started</Button>
     </div>
   )
