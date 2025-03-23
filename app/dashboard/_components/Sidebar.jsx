@@ -2,12 +2,14 @@
 import Image from 'next/image'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react'
+import React, { useContext } from 'react'
 import { HiOutlineHome,HiOutlineSquare3Stack3D,HiOutlineShieldCheck,HiOutlinePower } from "react-icons/hi2";
 import { Progress } from "@/components/ui/progress"
+import { UserCourseListContext } from '@/app/_context/UserCourseList';
 
 
 function Sidebar() {
+    const {userCourseList,setUserCourseList} = useContext(UserCourseListContext)
     const Menu = [
         {
             id:1,
@@ -28,15 +30,15 @@ function Sidebar() {
             name: 'Upgrade',
             icon: <HiOutlineShieldCheck />,
             path: '/dashboard/upgrade'
+        }
+        // ,
+        // {
+        //     id:4,
+        //     name: 'Logout',
+        //     icon: <HiOutlinePower />,
+        //     path: '/dashboard/logout'
 
-        },
-        {
-            id:4,
-            name: 'Logout',
-            icon: <HiOutlinePower />,
-            path: '/dashboard/logout'
-
-        },
+        // },
     ]
 
     const path = usePathname()
@@ -57,8 +59,8 @@ function Sidebar() {
         </ul>
 
         <div className='absolute bottom-10 w-[80%]'>
-            <Progress value={33} />
-            <h2 className='text-sm my-2'>3 out of 5 Course created</h2>
+            <Progress value={(userCourseList?.length/5)*100} />
+            <h2 className='text-sm my-2'>{userCourseList?.length} out of 5 Course created</h2>
             <h2 className='text-sx text-gray-500'>Upgrade your plan for unlimited course generation</h2>
         </div>
       

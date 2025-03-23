@@ -1,12 +1,20 @@
+import { Button } from '@/components/ui/button'
 import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 function Header() {
   return (
     <div className='flex justify-between items-center p-8 shadow-sm'>
-      <Image src={'/favicon.png'} alt='valtech' width={36} height={36} />
-      <UserButton />
+      <Image src={'/valtech.png'} alt='valtech' width={150} height={200} />
+      <div className='flex items-center gap-20'>
+        <Link href={'/dashboard'}>
+        <Button>Dashboard</Button>
+        </Link>
+        <UserButton />
+      </div>
+      
     </div>
   )
 }

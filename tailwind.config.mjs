@@ -57,5 +57,8 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"), // Animation Plugin
+    require("tailwind-scrollbar-hide"), // Scrollbar Hide Plugin
+  ],
 };

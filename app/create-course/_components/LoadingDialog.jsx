@@ -4,6 +4,7 @@ import {
     AlertDialogContent,
     AlertDialogDescription,
     AlertDialogHeader,
+    AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import Image from 'next/image';
 
@@ -12,6 +13,7 @@ function LoadingDialog({ loading }) {
     <AlertDialog open={loading}>
       <AlertDialogContent>
         <AlertDialogHeader>
+          <AlertDialogTitle></AlertDialogTitle>
           <AlertDialogDescription>
             <div className="flex flex-col items-center py-10">
               <Image src="/loader.gif" alt="valtech_loader" width={100} height={100} />
