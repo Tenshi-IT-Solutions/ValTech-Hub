@@ -12,7 +12,11 @@ function Header() {
         <Link href={'/dashboard'}>
         <Button>Dashboard</Button>
         </Link>
-        <UserButton />
+        <UserButton appearance={{
+        elements: {
+          userButtonAvatarBox: "w-12 h-12", 
+        },
+      }} />
       </div>
       
     </div>
