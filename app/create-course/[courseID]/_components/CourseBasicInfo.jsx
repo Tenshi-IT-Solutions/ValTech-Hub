@@ -12,6 +12,7 @@ import Link from "next/link";
 
 function CourseBasicInfo({ course, refreshData, edit = true }) {
   const [selectedFile, setSelectedFile] = useState();
+  console.log('course='+course?.courseID)
 
   useEffect(() => {
     if (course) {
@@ -24,26 +25,63 @@ function CourseBasicInfo({ course, refreshData, edit = true }) {
    * @param {*} event
    */
 
+  // const onFileSelected = async (event) => {
+  //   const file = event.target.files[0];
+  //   setSelectedFile(URL.createObjectURL(file));
+  //   const fileName = Date.now() + ".jpg";
+  //   const storageRef = ref(storage, "ai-course/", fileName);
+  //   await uploadBytes(storageRef, file)
+  //     .then((snapshot) => {
+  //       console.log("Upload file completed");
+  //     })
+  //     .then((resp) => {
+  //       getDownloadURL(storageRef).then(async (downloadUrl) => {
+  //         await db
+  //           .update(CourseList)
+  //           .set({
+  //             courseBanner: downloadUrl,
+  //           })
+  //           .where(eq(CourseList?.courseID, course?.courseID));
+  //       });
+  //     });
+  // };
+
   const onFileSelected = async (event) => {
-    const file = event.target.files[0];
-    setSelectedFile(URL.createObjectURL(file));
-    const fileName = Date.now() + ".jpg";
-    const storageRef = ref(storage, "ai-course/", fileName);
-    await uploadBytes(storageRef, file)
-      .then((snapshot) => {
-        console.log("Upload file completed");
-      })
-      .then((resp) => {
-        getDownloadURL(storageRef).then(async (downloadUrl) => {
-          await db
+    try {
+        const file = event.target.files[0];
+        // initially updating state for fast response
+        setSelectedFile(URL.createObjectURL(file));
+        if (!file) return;
+
+        // Generate a unique filename
+        const fileName = `${Date.now()}.jpg`;
+
+        // Correct storage reference path
+        const storageRef = ref(storage, `ai-course/${fileName}`);
+
+        // Upload file to Firebase Storage
+        await uploadBytes(storageRef, file);
+        console.log("File upload completed");
+
+        // Get Download URL
+        const downloadUrl = await getDownloadURL(storageRef);
+
+        // Update the state with selected file URL
+        setSelectedFile(downloadUrl);
+
+        // Update the database with the new course banner URL
+        await db
             .update(CourseList)
-            .set({
-              courseBanner: downloadUrl,
-            })
-            .where(eq(CourseList?.id, course?.id));
-        });
-      });
-  };
+            .set({ courseBanner: downloadUrl })
+            .where(eq(CourseList.courseID, course?.courseID));
+
+        console.log("Database updated with new banner URL");
+
+    } catch (error) {
+        console.error("Error uploading file:", error);
+    }
+};
+
   return (
     <div className="p-10 border rounded-xl shadow-sm mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">

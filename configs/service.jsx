@@ -8,6 +8,7 @@ const getVideos = async(query)=>{
         q:query,
         maxResults:1,
         type:'video',
+        videoDuration:'medium',
         key: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY
     }
     const resp = await axios.get(YOUTUBE_BASE_URL,{params})
