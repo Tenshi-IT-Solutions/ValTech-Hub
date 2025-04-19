@@ -16,7 +16,7 @@ import { Chapters, CourseList } from "@/configs/schema";
 import { eq } from "drizzle-orm";
 import Link from "next/link";
 
-function CourseCard({ course, refreshData }) {
+function CourseCard({ course, refreshData, displayUser = false }) {
   const handleOnDelete = async () => {
     const resp2 = await db
       .delete(Chapters)
@@ -46,10 +46,10 @@ function CourseCard({ course, refreshData }) {
       <div className="p-2">
         <h2 className="font-medium text-lg flex items-center justify-between">
           {course?.courseOutput?.CourseName}
-          <DropDownOption handleOnDelete={() => handleOnDelete()}>
+          {!displayUser && <DropDownOption handleOnDelete={() => handleOnDelete()}>
             {" "}
             <HiOutlineEllipsisVertical />{" "}
-          </DropDownOption>
+          </DropDownOption>}
         </h2>
 
         <p className="text-sm text-gray-400 my-1">{course?.category}</p>
@@ -62,6 +62,10 @@ function CourseCard({ course, refreshData }) {
             {course?.courseOutput?.Level}
           </h2>
         </div>
+        {displayUser && <div className="flex gap-2 items-center mt-2">
+          <Image alt="user" src={course?.userProfileImage} width={35} height={35} className="rounded-full" />
+          <h2 className="text-sm">{course?.userName}</h2>
+        </div>}
       </div>
     </div>
   );
