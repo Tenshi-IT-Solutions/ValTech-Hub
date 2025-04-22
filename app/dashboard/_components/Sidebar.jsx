@@ -30,6 +30,12 @@ function Sidebar() {
             name: 'Upgrade',
             icon: <HiOutlineShieldCheck />,
             path: '/dashboard/upgrade'
+        },
+        {
+            id:4,
+            name: 'User Profile',
+            icon: <HiOutlineShieldCheck />,
+            path: '/user-profile'
         }
         // ,
         // {
@@ -58,11 +64,11 @@ function Sidebar() {
             ))}
         </ul>
 
-        <div className='absolute bottom-10 w-[80%]'>
+        {userCourseList?.length<=5 ? <div className='absolute bottom-10 w-[80%]'>
             <Progress value={(userCourseList?.length/5)*100} />
             <h2 className='text-sm my-2'>{userCourseList?.length} out of 5 Course created</h2>
             <h2 className='text-sx text-gray-500'>Upgrade your plan for unlimited course generation</h2>
-        </div>
+        </div> : ''}
       
     </div>
   )
