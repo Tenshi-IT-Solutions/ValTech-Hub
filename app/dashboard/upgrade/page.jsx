@@ -74,7 +74,7 @@ function Upgrade() {
   
 
   return (
-    <div className="flex justify-center gap-20 mt-10">
+    <div className="flex-col md:flex justify-center gap-20 mt-10">
       <BackgroundGradient className="rounded-[22px] max-w-sm p-10 sm:p-10 text-center bg-white dark:bg-zinc-900">
         
         <p className="text-base font-semibold sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
