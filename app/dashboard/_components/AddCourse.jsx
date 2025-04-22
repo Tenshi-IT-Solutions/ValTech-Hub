@@ -43,7 +43,7 @@ function AddCourse() {
           Create new course with AI, share with friends, and earn from it
         </p>
       </div>
-      <Link href={shouldUpgrade ? '/dashboard/upgrade' : '/create-course'}>
+      <Link href={shouldUpgrade ? '/dashboard/upgrade' : '/create-course'} prefetch passHref>
         <Button>+ Create AI Course</Button>
       </Link>
     </div>

@@ -16,7 +16,7 @@ function Header() {
       />
       <div className="flex items-center justify-between md:justify-end md:gap-20 w-full">
   <div>
-    <Link href="/dashboard">
+    <Link href="/dashboard" prefetch passHref>
       <Button className="w-auto h-auto">Dashboard</Button>
     </Link>
   </div>

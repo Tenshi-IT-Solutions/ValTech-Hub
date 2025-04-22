@@ -34,7 +34,7 @@ function Sidebar({ onClose }) {
             href={item.path}
             onClick={() => {
               if (onClose) onClose()
-            }}
+            }} prefetch passHref
           >
             <div
               className={`flex items-center gap-2 text-gray-600 p-3 cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg mb-3 ${

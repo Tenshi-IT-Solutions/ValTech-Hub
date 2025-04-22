@@ -34,7 +34,7 @@ function CourseCard({ course, refreshData, displayUser = false }) {
 
   return (
     <div className="shadow-sm rounded-lg border p-2 hover:border-primary cursor-pointer mt-4">
-      <Link href={"/course/" + course?.courseID}>
+      <Link href={"/course/" + course?.courseID} prefetch passHref>
         <Image
           src={course?.courseBanner}
           width={300}

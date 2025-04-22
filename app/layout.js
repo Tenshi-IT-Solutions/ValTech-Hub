@@ -2,6 +2,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "./provider";
+import { Theme } from "@radix-ui/themes";
 
 const outfit = Outfit({subsets: ['latin']})
 
@@ -18,7 +19,10 @@ export default function RootLayout({ children }) {
         className={outfit.className}
       >
         <Provider>
-        {children}
+          <Theme>
+          {children}
+          </Theme>
+        
         </Provider>
         
       </body>
