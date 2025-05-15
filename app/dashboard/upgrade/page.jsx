@@ -74,7 +74,7 @@ function Upgrade() {
   
 
   return (
-    <div className="flex-col md:flex justify-center gap-20 mt-10">
+    <div className="flex flex-col md:flex-row justify-center gap-20 mt-10">
       <BackgroundGradient className="rounded-[22px] max-w-sm p-10 sm:p-10 text-center bg-white dark:bg-zinc-900">
         
         <p className="text-base font-semibold sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
@@ -116,7 +116,7 @@ function Upgrade() {
           <li>✔ Regular Feature Updates</li>
           <li>✔ Early Access to New Tools</li>
         </ul>
-        { true ? (<p className="text-primary p-4" >Current Plan</p>) : ""}
+        { userDetail?.isMember == true ? (<p className="text-primary p-4" >Current Plan</p>) : (<p className="text-primary p-4" >Upgrade</p>)}
         <div className="m-2">
         {userDetail?.isMember == false ? (
         <Button onClick={onCheckoutClick}>Upgrade</Button> 
