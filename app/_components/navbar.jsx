@@ -12,10 +12,12 @@ import {
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useUser } from '@clerk/nextjs';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { isSignedIn, isLoaded } = useUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,10 +42,16 @@ export default function Navbar() {
           <BookOpen className="h-8 w-8 text-primary" />
           <span className="text-2xl font-bold text-primary">Valtech</span>
         </div> */}
+        <Link href={'/'}>
         <Image src={'/valtech.png'} alt='valtech' width={150} height={200}></Image>
+        </Link>
 
         {/* Desktop nav */}
+        
         <nav className="hidden md:flex items-center space-x-8">
+          <a href="/explore" className="text-foreground/80 hover:text-primary transition-colors">
+            Explore
+          </a>
           <a href="#features" className="text-foreground/80 hover:text-primary transition-colors">
             Features
           </a>
@@ -73,7 +81,9 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center space-x-4">
-        <Link href={'/dashboard'} prefetch passHref>
+          {isSignedIn ? <Link href="/dashboard" prefetch passHref>
+      <Button className="w-auto h-auto">Dashboard</Button>
+    </Link> : <div><Link href={'/dashboard'} prefetch passHref>
               <Button variant="outline" className="font-medium">
                 Sign In
               </Button>
@@ -82,7 +92,8 @@ export default function Navbar() {
               <Button className="font-medium">
                 Get Started
               </Button>
-              </Link>;
+              </Link></div> }
+        
         </div>
 
         {/* Mobile menu button */}
@@ -137,7 +148,7 @@ export default function Navbar() {
               <Button className="w-full">
                 Get Started
               </Button>
-              </Link>;
+              </Link>
               
             </div>
           </div>
